@@ -1,0 +1,72 @@
+<Results>:
+    ScrollView:
+        Label:
+            text: 'results'
+<LoadDialog>:
+    orientation: 'vertical'
+    FileChooserListView:
+        path: root.default_path
+        on_selection: file.text = self.selection and self.selection[0] or ''
+    TextInput:
+        id: file
+        size_hint_y: None
+        height: 30
+    BoxLayout:
+        size_hint_y: None
+        height: 30
+        Button:
+            text: "Cancel"
+            on_release: root.cancel()
+        Button: 
+            text: "Load"
+            on_release: root.load(file.text)
+
+<MainWindow>:
+    # Properties
+    sql_text: sql.text
+    object_explorer: object_explorer
+    # Settings
+    orientation: 'vertical'
+
+    # Menu bar
+    ActionBar:
+        ActionView:
+            ActionPrevious:
+                title: 'Sqlite Studio'
+                with_previous: False
+
+            ActionButton:
+                text: 'Open Database'
+                on_release: root.show_load()
+            ActionButton:
+                text: 'Run'
+                on_release: root.run_query()
+    BoxLayout:
+        BoxLayout:
+            orientation: 'vertical'
+            size_hint: [.25,1]
+            Label:
+                text: 'Tables'
+                size_hint_y: None
+                height: 30
+                font_size: 18
+            Button:
+                text: 'Refresh'
+                size_hint_y: None
+                height: 30
+                on_release: root.object_explorer.load_schema()
+            ObjectExplorer:
+                id: object_explorer
+
+
+        # Editor and results
+        BoxLayout:
+            orientation: 'vertical'
+            TextInput:
+                id: sql
+                text: ''
+            Results:
+
+
+                
+            

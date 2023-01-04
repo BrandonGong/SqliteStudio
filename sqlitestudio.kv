@@ -55,7 +55,8 @@
     # Properties
     sql_text: sql.text
     object_explorer: object_explorer
-    results: results
+    query_window: query_window
+    
     BoxLayout:
         # Settings
         size: root.size
@@ -95,11 +96,10 @@
             # Editor and results
             BoxLayout:
                 orientation: 'vertical'
+                id: query_window
                 TextInput:
                     id: sql
                     text: ''
-                Results:
-                    id: results
 
 
                 

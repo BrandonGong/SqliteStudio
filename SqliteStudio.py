@@ -81,6 +81,7 @@ class Results(BoxLayout):
 class MainWindow(Widget):
     sql_text = StringProperty(None) # SQL text
     object_explorer = ObjectProperty(None) # Object explorer widget
+    query_window = ObjectProperty(None)
     results = ObjectProperty(None)
     connection = ObjectProperty(None) # Sqlite Connection
 
@@ -120,6 +121,10 @@ class MainWindow(Widget):
             return
         try:
             results = self.connection.execute(self.sql_text)
+            if self.results is None:
+                self.results = Results()
+                self.query_window.add_widget(self.results)
+
             self.results.populate_results(results)
             self.connection.commit()
         except Exception as ex:

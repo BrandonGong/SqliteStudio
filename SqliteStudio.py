@@ -121,9 +121,11 @@ class MainWindow(Widget):
             return
         try:
             results = self.connection.execute(self.sql_text)
-            if self.results is None:
-                self.results = Results()
-                self.query_window.add_widget(self.results)
+            if self.results is not None:
+                self.query_window.remove_widget(self.results)
+                
+            self.results = Results()
+            self.query_window.add_widget(self.results)
 
             self.results.populate_results(results)
             self.connection.commit()

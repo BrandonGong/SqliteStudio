@@ -2,7 +2,7 @@
     font_size: 14
     bold: True
     size_hint_y: None
-    size: self.width, 25
+    size: self.width, 30
     border: 1,2,1,2
     color: 0,0,0,1
     background_color: 0,0,0,.25
@@ -15,9 +15,10 @@
         
 <TableRow>:
     size_hint_y: None
-    size: self.width, 25
+    size: self.width, 30
     border: 1,2,1,2
     color: 0,0,0,1
+    multiline: True
 
 <Results>:
     grid: grid
@@ -30,7 +31,9 @@
             size: self.size
     ScrollView:
         GridLayout:
+            size_hint_y: None
             id: grid
+            height: self.minimum_height
 
 <LoadDialog>:
     orientation: 'vertical'
@@ -56,7 +59,7 @@
     sql_text: sql.text
     object_explorer: object_explorer
     query_window: query_window
-    
+
     BoxLayout:
         # Settings
         size: root.size

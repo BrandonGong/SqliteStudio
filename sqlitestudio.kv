@@ -1,7 +1,37 @@
+<TableHeader>:
+    font_size: 14
+    bold: True
+    size_hint_y: None
+    size: self.width, 25
+    border: 1,2,1,2
+    color: 0,0,0,1
+    background_color: 0,0,0,.25
+    canvas.before:
+        Color:
+            rgba: root.background_color
+        Rectangle:
+            size: self.size
+            pos: self.pos
+        
+<TableRow>:
+    size_hint_y: None
+    size: self.width, 25
+    border: 1,2,1,2
+    color: 0,0,0,1
+
 <Results>:
+    grid: grid
+    orientation: 'vertical'
+    canvas.before:
+        Color:
+            rgb: 1,1,1
+        Rectangle:
+            pos: self.pos
+            size: self.size
     ScrollView:
-        Label:
-            text: 'results'
+        GridLayout:
+            id: grid
+
 <LoadDialog>:
     orientation: 'vertical'
     FileChooserListView:
@@ -25,47 +55,51 @@
     # Properties
     sql_text: sql.text
     object_explorer: object_explorer
-    # Settings
-    orientation: 'vertical'
-
-    # Menu bar
-    ActionBar:
-        ActionView:
-            ActionPrevious:
-                title: 'Sqlite Studio'
-                with_previous: False
-
-            ActionButton:
-                text: 'Open Database'
-                on_release: root.show_load()
-            ActionButton:
-                text: 'Run'
-                on_release: root.run_query()
+    results: results
     BoxLayout:
+        # Settings
+        size: root.size
+        orientation: 'vertical'
+        
+        # Menu bar
+        ActionBar:
+            ActionView:
+                ActionPrevious:
+                    title: 'Sqlite Studio'
+                    with_previous: False
+
+                ActionButton:
+                    text: 'Open Database'
+                    on_release: root.show_load()
+                ActionButton:
+                    text: 'Run'
+                    on_release: root.run_query()
         BoxLayout:
-            orientation: 'vertical'
-            size_hint: [.25,1]
-            Label:
-                text: 'Tables'
-                size_hint_y: None
-                height: 30
-                font_size: 18
-            Button:
-                text: 'Refresh'
-                size_hint_y: None
-                height: 30
-                on_release: root.object_explorer.load_schema()
-            ObjectExplorer:
-                id: object_explorer
+            BoxLayout:
+                orientation: 'vertical'
+                size_hint: [.25,1]
+                Label:
+                    text: 'Tables'
+                    size_hint_y: None
+                    height: 30
+                    font_size: 18
+                Button:
+                    text: 'Refresh'
+                    size_hint_y: None
+                    height: 30
+                    on_release: root.object_explorer.load_schema()
+                ObjectExplorer:
+                    id: object_explorer
 
 
-        # Editor and results
-        BoxLayout:
-            orientation: 'vertical'
-            TextInput:
-                id: sql
-                text: ''
-            Results:
+            # Editor and results
+            BoxLayout:
+                orientation: 'vertical'
+                TextInput:
+                    id: sql
+                    text: ''
+                Results:
+                    id: results
 
 
                 
